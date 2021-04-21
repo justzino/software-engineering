@@ -2,11 +2,33 @@
 
 > This is a repository for 'Software Engineering' Class of Hongik Univ.
 
+# Git & Github
+
+## Assignment1
+
+### static website using github and template
+
+> hosting url : https://justzino.github.io/hongik-software-engineering/
+
+# Docker
+
 ## Apache-docker 실습
 
-### Dockerfile
+### Process
 
-```docker
+#### 1. Create AWS EC2 instance & Install Docker on ubuntu
+
+```shell
+apt-get update
+apt-get install docker.io
+docker --version
+```
+
+#### 2. Add a Dockerfile for apache server
+
+- code : [apache server Dockerfile](hw2-wordpress\docker-compose.yml)
+
+```dockerfile
 FROM ubuntu
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
@@ -16,29 +38,40 @@ ENTRYPOINT apachectl -D FOREGROUND
 ENV test TestingENV
 ```
 
-### Command
+#### 3. Image build -> run
+
+- port forwarding
+- volume mount
+
+#### 4. mount 시킨 ubuntu의 volume에 html 파일 생성 및 변경 후 container에 잘 적용 되었는지 확인
+
+### Commands
+
+#### 1. Docker Commands
 
 ```shell
 docker pull ubuntu
 sudo docker run -it -d [ubuntu]
 sudo docker exec -it [container ID] bash
 sudo docker build . -t [생성할 image이름]
-sudo docker run -it -p 5000:80 -v /home/ubuntu/[디렉토리 이름]:/var/www/html -d [image이름]
+# sudo docker run -it -p 5000:80 -v /home/ubuntu/[디렉토리 이름]:/var/www/html -d [image이름]
 sudo docker run -it -p 5000:80 -v /home/ubuntu/docker:/var/www/html -d [image이름]
+
+sudo docker rm -f $(sudo docker ps -a -q)
+sudo docker rmi -f $(sudo docker images -a -q)
 ```
 
 - /var/www/html/ 에 volume을 마운틴하는 이유 : apache의 index.html 파일이 해당 경로에 위치해 있기 때문
 - /var/www/html/tmp.html 생성후 `서버주소/tmp.html` 접속 -> 제대로 mount 적용 되는지 확인
 
----
+#### 2. Apache Commands
 
-## Assignment1
+```shell
+service apache2 status
+service apache2 start
+```
 
-### static website using github and template
-
-> hosting url : https://justzino.github.io/hongik-software-engineering/
-
----
+# docker-compose
 
 ## Assignment2
 
@@ -51,6 +84,51 @@ sudo docker run -it -p 5000:80 -v /home/ubuntu/docker:/var/www/html -d [image이
 - 만일 브라우저에서 데이터를 웹 서버에 보내어 그에 따라 서버가 여러분이 정해 놓은 작업을 수행하는 dynamic 서비스를 구현하는 방법을 모르거나 해 본 적이 없는 사람은 지난 번 static 웹 사이트 과제처럼 자기 이름 학번을 보여주는 wordpress 를 이용한 웹 서버를 container 로 만들어도 됩니다.
 
 - dynamic 서비스를 만들 줄 아는 사람도 그냥 간단히 브라우저에서 이름을 입력하면 "안뇽, <입력한 이름>"이 브라우저에서 rendering 하는 매우 간단한 프로그램으로 충분하니 복잡한 서비스를 구현하여 너무 자랑하지 말기.
+
+### Process
+
+#### 1. docker-compose 설치
+
+```shell
+sudo curl -L https://github.com/docker/compose/releases/download/1.29.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+```
+
+#### 2. docker-compose.yml 추가
+
+- [wordpress compose file 참고](https://docs.docker.com/compose/wordpress/)
+
+```yml
+version: "3.9"
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - "8000:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+volumes:
+  db_data: {}
+```
 
 ### Reference
 
