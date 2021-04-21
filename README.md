@@ -75,7 +75,7 @@ service apache2 start
 
 ## Assignment2
 
-### wordpress, php를 사용하여 웹 서비스 만들어 보기
+### wordpress, php, docker-compose를 사용한 웹 서비스 만들어 보기
 
 - wordpress를 사용한 브라우저를 EC2 서버에 올리기
 
@@ -133,3 +133,113 @@ volumes:
 ### Reference
 
 - https://docs.docker.com/compose/wordpress/
+
+# Swarm
+
+## swarm 개념
+
+- 각 Container들을 cluster 하고 schedule 하여, 전체 Container 클러스터를 하나의 virtual 단일 Container로 관리
+- 각 Container의 상태를 모니터링하여 컨테이너 수를 각 호스트에서 늘리거나 줄이며 운영하는 도구
+- **여러 호스트에서** 다수의 컨테이너들을 운영(orchaestrate), 필요에 따라 컨테이너의 수를 늘리고 줄이는 auto-scaling 기능
+
+  ![swarm.png](swarm\swarm.png)
+
+## 실습
+
+### swarm 으로 여러 호스트에서 다수의 Apache server 컨테이너 운영
+
+### Process
+
+#### 1. AWS EC2 instance 2 개 이상 생성
+
+- master, workers instances
+- 각 ubuntu 에 docker 설치
+
+#### 2. master, worker ubuntu에 동일한 image build (or pull)
+
+- 이 경우 위에서 사용했던 apache Dockerfile을 사용하여 image build
+
+#### 3. master 노드에서 swarm init
+
+```shell
+sudo docker swarm init --advertise-addr=[private IP address]
+
+sudo docker service ls
+sudo docker node ls
+sudo docker ps
+```
+
+> 결과
+>
+> ```shell
+> Swarm initialized: current node (vhykgsb3y716xyy272ac2dvn0) is now a manager.
+>
+> To add a worker to this swarm, run the following command:
+>
+>     docker swarm join --token SWMTKN-1-2xlodjb3k3hqtyijpkxgb6dvhknwyy7ggkjkjdjbh31j6v8rm2-1n6zhwapbhzxq2txtsmkxqfkt [private IP address]:port
+>
+> To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+> ```
+
+#### 4. worker node 에서 swarm 으로 join
+
+- 위의 swarm init 결과로 나온 command 를 worker node에서 실행
+
+```shell
+sudo docker swarm join --token SWMTKN-1-2xlodjb3k3hqtyijpkxgb6dvhknwyy7ggkjkjdjbh31j6v8rm2-1n6zhwapbhzxq2txtsmkxqfkt [private IP address]:port
+```
+
+#### 5. replicas 생성, 제거, scale 관리
+
+### Commands
+
+#### master node Commands
+
+- Create a service
+
+```shell
+sudo docker swarm init --advertise-addr=[private IP address]
+# sudo docker service create --name [service name] --replicas [num of replicas] -p [port mapping] [image name]
+sudo docker service create --name apache --replicas 5 -p 5000:80 test
+```
+
+- Scale-up and down
+
+```shell
+# sudo docker service scale [service name]=[num of service instances]
+sudo docker service scale apache=7
+```
+
+- ps list
+
+```shell
+sudo docker service ls
+sudo docker node ls
+sudo docker ps
+```
+
+- Remove a service
+
+```shell
+sudo docker swarm leave --force     # on master
+# sudo docker service rm [service name]
+sudo docker service rm apache
+```
+
+#### worker node Commands
+
+- Connect to swarm
+
+```shell
+sudo docker swarm join --token SWMTKN-1-2xlodjb3k3hqtyijpkxgb6dvhknwyy7ggkjkjdjbh31j6v8rm2-1n6zhwapbhzxq2txtsmkxqfkt [private IP address]:port
+```
+
+- ps list
+
+```shell
+sudo docker ps
+```
+
+```shell
+sudo docker swarm leave     # on worker
+```
