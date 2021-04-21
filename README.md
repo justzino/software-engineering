@@ -195,7 +195,7 @@ sudo docker swarm join --token SWMTKN-1-2xlodjb3k3hqtyijpkxgb6dvhknwyy7ggkjkjdjb
 
 #### master node Commands
 
-- Create a service
+- Create a service (private IP 에 주의)
 
 ```shell
 sudo docker swarm init --advertise-addr=[private IP address]
