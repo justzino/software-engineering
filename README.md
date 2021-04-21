@@ -146,7 +146,7 @@ volumes:
 
 ## 실습
 
-### swarm 으로 여러 호스트에서 다수의 Apache server 컨테이너 운영
+### swarm을 이용하여 여러 호스트에서 다수의 Apache server 컨테이너 운영
 
 ### Process
 
@@ -190,6 +190,7 @@ sudo docker swarm join --token SWMTKN-1-2xlodjb3k3hqtyijpkxgb6dvhknwyy7ggkjkjdjb
 ```
 
 #### 5. replicas 생성, 제거, scale 관리
+- 아래의 commands 참고
 
 ### Commands
 
@@ -240,6 +241,7 @@ sudo docker swarm join --token SWMTKN-1-2xlodjb3k3hqtyijpkxgb6dvhknwyy7ggkjkjdjb
 sudo docker ps
 ```
 
+- Remove a service
 ```shell
 sudo docker swarm leave     # on worker
 ```
