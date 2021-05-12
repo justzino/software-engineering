@@ -142,7 +142,7 @@ volumes:
 - 각 Container의 상태를 모니터링하여 컨테이너 수를 각 호스트에서 늘리거나 줄이며 운영하는 도구
 - **여러 호스트에서** 다수의 컨테이너들을 운영(orchaestrate), 필요에 따라 컨테이너의 수를 늘리고 줄이는 auto-scaling 기능
 
-  ![swarm.png](swarm\swarm.png)
+  ![swarm.png](/swarm/swarm.png)
 
 ## 실습
 
@@ -271,7 +271,7 @@ $ sudo vi hosts
 ```
 - [webservers] 주석 풀고, 아래에
 - 배포할 node 서버의 <Private IP address> 입력 (ex.172.31.xx.xxx)
-  ![ansible1.JPG](images/ansible1.JPG)
+  ![ansible1.JPG](/images/ansible1.JPG)
 
 ### Ansible ad-hoc commands (playbook에 기재하지 않고 필요할 때 실행시키는 명령)
 #### master 기계에서 연결 확인
