@@ -1,0 +1,16 @@
+---
+- name: install apache2 & php
+  hosts: webservers
+
+  gather_facts: true
+  tasks:
+    - name: “install apache2”
+      package: name=apache2 state=present
+    - name: “install apache2-php7”
+      package: name=libapache2-mod-php state=present
+    - name: “install php-cli”
+      package: name=php-cli state=present
+    - name: “install php-gd”
+      package: name=php-gd state=latest
+    - name: start apache2
+      service: name=apache2 state=restarted

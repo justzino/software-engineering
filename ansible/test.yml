@@ -1,0 +1,7 @@
+---
+- name: test
+  host: webservers
+  gather_facts: true
+  tasks:
+    - name: copy a file
+      copy: src=/root/trivial.txt dest=/root/yap.txt

@@ -1,0 +1,8 @@
+---
+- name: deploy files
+  hosts: webservers
+
+  gather_facts: true
+  tasks:
+    - name: copy php file
+      copy: src=/root/convert.php dest=/var/www/html/convert.php
