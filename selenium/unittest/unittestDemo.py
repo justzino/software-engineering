@@ -1,5 +1,6 @@
 from selenium import webdriver
 import unittest
+import HtmlTestRunner
 import time
 
 
@@ -23,3 +24,6 @@ class DemoUnitTest(unittest.TestCase):
 
 
 print("Test Done Successfully!")
+
+if __name__ == '__main__':
+    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output='C:/programming/hongik-software-engineering/selenium/reports'))
