@@ -1,0 +1,2 @@
+selenium >= 3.1
+html-testRunner >= 1.2
