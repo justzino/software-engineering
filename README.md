@@ -314,3 +314,41 @@ $ ssh <private ip address>    # node 기계에서 passwd root, 작동 여부 확
 이제 ansible을 하기 위한 사전작업이 끝
 
 #### Playbook 을 위한 yml 파일 작성
+
+
+# 7. Selenium 
+| 가장 대표적인 **Automated testing suite**
+
+### 단점
+- Web app만 테스트
+- 지원 프로그램 (open source community)
+- Setup과 사용법 불편
+- IDE integrated / PL 숙련도에 좌우됨
+- No graphic reporting facility
+- Image 기반 테스팅 불가 – 이미지 비교 기능 없음
+### 장점
+- Open source
+- 여러 PL 에서 사용 가능
+- 여러 web browser 지원 including headless browser
+- Parallel test execution
+- Supports frameworks : TestNG, JUnit, NUnit
+
+### Webdriver
+- 테스트 케이스를 생성하고 실행하는 API
+  - https://webdriver.io/docs/api.html
+- Provides a set of methods
+- Uses DOM locators to i/o or manipulate the document objects
+- 각 브라우저 별 webdriver
+  - 테스트 스크립트를 작성할 여러 언어 별 method 제공
+  - Java, C#, PHP, Python, Perl, Ruby
+- POM(page object model) 기반 Webdriver scripting
+  - Form/Click activity 기반
+- Selenium RC (remote control)와 합쳐 짐 (Selenium 3)
+- 빠른 execution time
+  - Remote machine 에서 web 테스트할 때는 RC 사용 (느림)
+- 상세한 테스트 결과보고는 (아직) 생성할 수 없음
+
+### Selenium IDE
+- 테스트 케이스를 생성하고 실행하는 plug-in
+- 용자의 모든 interaction을 기록하고 재생
+- record/play tool로 불림
