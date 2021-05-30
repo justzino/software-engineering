@@ -130,9 +130,6 @@ volumes:
   db_data: {}
 ```
 
-### Reference
-
-- https://docs.docker.com/compose/wordpress/
 
 # 4. Swarm
 
@@ -249,9 +246,68 @@ $ sudo docker swarm leave     # on worker
 # 5. Kubernetes(k8s)
 작성 예정  
 
-# 6. Ansible
+# 6. Configuration Management tools
+### 실습에서는 Ansible을 사용
 ## 개념
-보완 예정  
+### Configuration Management tools
+
+- Why automated CM?
+    - 대규모 heterogeneous computer cluster 관리
+        - 수백~수천~수만 대 이상 서버/1500대 규모의 네트워크 장비
+    - HW 모니터링
+    - SW install
+    - DevOps 중 Deploy 과정에 해당되는 도구
+    - Environment 불일치 문제 해소 (cf. containerization)
+    - Roll back 자동화
+    - 부실한 CM은 Service Downtime에 xx가장 큰 요인
+- IT Automation의 기본 도구
+
+### IaC (Infrastructure as Code)
+
+- 수작업이 아닌 code를 제공하여 IT operations (build, deploy, manage)을 자동화하는 것
+- 중앙에서 코드를 write하여 수백 대 이상의 기기에 Dev, Test, Production 환경을 제공(provisioning)함
+
+### Shell script vs CM tool script
+
+- 각 서버/기기에 환경을 provisioning 하는 점에서는 동일 목표
+- Shell script로 관리를 위한 코딩을 한다는 것은 모든 것을 scrip로 구현하는 것  
+  → workflow/숙련도/일관성/upgrade 이슈
+- CM script는 훨씬 편리 → 이슈를 제거/자동처리
+- CM Tool UI
+
+### Puppet vs Chef vs Saltstack vs Ansible
+- 어느 도구가 상대적으로 우수하다고 할 수 없음
+1. Scalability
+    - 4 개 도구 모두 scalability 우수 (수천 대 이상의 기기 동시 관리)
+2. Ease of setup
+    - Puppet/Chef/Saltstack : master-agent
+    - Ansible : master only => fast (and **easy**) setup
+3. Availability → Backup
+    - Puppet, Saltstack : multi masters
+    - Chef : backup chef
+    - Ansible : primary/secondary server
+4. Management
+    - Puppet : not easy, DSL(domain specific language)
+    - Chef : Ruby DSL program, not easy
+    - Saltstack : easy to medium
+    - Ansible : Easy (yaml)
+5. Interoperability
+    - Puppet, Chef, Saltstack : master only on linux
+    - agents are on linux/windows
+    - Ansible : sever on linux (as well as windows), clients on linux/windows
+6. Configuration Languages
+    - Puppet : Puppet DSL, not easy, admin 편의
+    - Chef : Ruby DSL, difficult, 개발자 편의
+    - Saltstack : YAML built on Python, easy
+    - Ansible : YAML built on Python, easy
+7. 인기도
+    - Puppet/Chef : 점점 인기도 떨어짐
+    - Saltstack : 낮음
+    - Ansible : 현재 가장 널리 사용됨
+8. 비용
+    - 대략 연간 10,000달러 / 1,000대 기기
+9. 누가 사용하나?
+    - 모든 회사
 
 ## 실습
 실습을 위해 EC2 instance 2개 준비: Master + Node
@@ -352,3 +408,8 @@ $ ssh <private ip address>    # node 기계에서 passwd root, 작동 여부 확
 - 테스트 케이스를 생성하고 실행하는 plug-in
 - 용자의 모든 interaction을 기록하고 재생
 - record/play tool로 불림
+
+
+
+# Reference
+- https://docs.docker.com/compose/wordpress/
