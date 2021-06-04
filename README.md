@@ -246,7 +246,7 @@ $ sudo docker swarm leave     # on worker
 # 5. Kubernetes(k8s)
 작성 예정  
 
-# 6. Configuration Management tools
+# 6. Configuration Management tools (형상 관리)
 ### 실습에서는 Ansible을 사용
 ## 개념
 ### Configuration Management tools
@@ -409,7 +409,12 @@ $ ssh <private ip address>    # node 기계에서 passwd root, 작동 여부 확
 - 용자의 모든 interaction을 기록하고 재생
 - record/play tool로 불림
 
+# 8. Jenkins
+### 개념
 
+### 설치
+
+### 실습
 
 # Reference
 - https://docs.docker.com/compose/wordpress/
