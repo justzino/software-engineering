@@ -299,7 +299,6 @@ volumes:
 - bug가 전체 app에 영향을 미침
 - 새로운 기술을 채택하기에 장벽이 있음
 
-# 4. Swarm
 ## Microservices
 
 - 거의 모든 응용, 특히 Web 기반 App 
@@ -314,17 +313,23 @@ volumes:
 
 <br><br>
 
-## swarm 개념
+# 7. Docker Swarm
+> “Container Orchestration tool"
 
-- 각 Container들을 cluster 하고 schedule 하여, 전체 Container 클러스터를 하나의 virtual 단일 Container로 관리
+## Docker Compose
+
+- Compose 는 **동일 호스트에서** 두 개 이상의 컨테이너를 운영
+
+## Swarm
+
+- Swarm은 각 Container들을 cluster 하고 schedule 하여, 전체 Container 클러스터를 하나의 virtual 단일 Container로 관리
 - 각 Container의 상태를 모니터링하여 컨테이너 수를 각 호스트에서 늘리거나 줄이며 운영하는 도구
 - **여러 호스트에서** 다수의 컨테이너들을 운영(orchaestrate), 필요에 따라 컨테이너의 수를 늘리고 줄이는 auto-scaling 기능
-
-  ![swarm.png](/swarm/swarm.png)
+  ![swarm](images/swarm.png)
 
 ## 실습
 
-### swarm을 이용하여 여러 호스트에서 다수의 Apache server 컨테이너 운영
+- swarm을 이용하여 여러 호스트에서 다수의 Apache server 컨테이너 운영
 
 ### Process
 
@@ -426,6 +431,8 @@ $ sudo docker swarm leave     # on worker
 
 # 5. Kubernetes(k8s)
 작성 예정  
+<br><br>
+
 
 # 6. Configuration Management tools (형상 관리)
 ### 실습에서는 Ansible을 사용
