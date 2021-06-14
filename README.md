@@ -287,8 +287,32 @@ volumes:
   db_data: {}
 ```
 
+<br><br>
+
+# 6. Monolithic App vs Microservices
+
+## Monolithic App
+
+- 모든 기능이 단일 프로그램 안에 구현됨
+- 비현실적, 비효율, 매우 낮은 생산성
+- 비대한 app, 일부가 update 되면 → 전체 app이 re-deploy 되어야 함.
+- bug가 전체 app에 영향을 미침
+- 새로운 기술을 채택하기에 장벽이 있음
 
 # 4. Swarm
+## Microservices
+
+- 거의 모든 응용, 특히 Web 기반 App 
+(front-end + backend services including DB, login, search service, mail, etc.)
+- 각 단일 서비스가 서로 loosely coupled
+- Microservices 사이에서의 Communication은?
+    - 프로그램 속에서 args 전달하는 대신에 HTTP 통신 프로토콜 등을 통한 데이터 교환
+    ⇒ RESTful API (JSON)
+    - 각 service 들은 bug 관점에서 상호 독립적
+    ⇒ 획기적, 서로 다른 기술로 구현
+- Monolithic App의 단점이 모두 장점으로!!
+
+<br><br>
 
 ## swarm 개념
 
