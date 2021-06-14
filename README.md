@@ -1,9 +1,7 @@
 <h1 align="center">Software Engineering</h1>
 
-> This is a repository for 'Software Engineering' Class of Hongik Univ.
 > This is a repository for 'Summary of Software Engineering' Class of Hongik Univ.
 
-# 1. Git & Github
 # 1. Software Development methodology
 ## (1) Waterfall model - 말도 안됨 ㅎ
 ![waterfall-model](images/waterfall-model.png)
@@ -30,7 +28,7 @@
 - "**구현 기술**"이 이러하기 때문에 이렇게 개발해야 한다 → 망하는 지름길
 - "**목표**"를 결정 → 구현가능한 엔지니어를 고용해야함
 
-
+<br><br>
 
 # 2. 현재의 개발 방법론 및 Solution
 
@@ -64,7 +62,7 @@
     - **Jenkins** – 300개 이상의 plug-ins
     - cf) Kubernetes – Docker container orchestration manager (vs docker swarm)
 
-
+<br><br>
 
 # 3. Git & Github
 ### 목적 : Version Control
@@ -85,8 +83,7 @@
 
 > hosting url : https://justzino.github.io/hongik-software-engineering/
 
-# 2. Docker
-
+<br><br>
 
 # 4. Docker
 
@@ -229,7 +226,9 @@ $ service apache2 status
 $ service apache2 start
 ```
 
-# 3. docker-compose
+<br><br>
+
+# 5. docker-compose
 
 ## Assignment2
 
