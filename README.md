@@ -87,7 +87,90 @@
 
 # 2. Docker
 
-## Apache-docker 실습
+
+# 4. Docker
+
+## 목적
+
+- testing / staging / production의 시스템 환경이 달라서 생기는 문제를 해결하자
+- 서로 다른 컴퓨팅 환경에서 애플리케이션을 안정적으로 실행할 수 있으며 개발 환경에 구애 받지 않고 빠른 개발과 배포가 가능하도록 하자
+
+### DevOps 중 - Deploy/Operate 에 해당
+
+## 어떻게 목적 달성?
+
+- 개발 환경의 일관성 : 개발환경과 서비스 환경을 동일하게 만들자
+- 모든 SW dependency를 "contain" 할 수 있는 SW container 를 만들어서 동일하게 구성하자
+
+## 용어 정의 및 개념
+
+- **Docker** = 컨테이너 기반의 **오픈소스 가상화** 플랫폼
+    - OS 수준 가상화를 사용하여 컨테이너라는 패키지로 소프트웨어를 전달하는 PaaS(Platform as a Service) 플랫폼
+- **Container** = 격리된 공간에서 프로세스가 동작하는 기술 / 이미지를 실행한 상태 (프로세스)
+- **Image** = 컨테이너 실행에 필요한 파일과 설정값 등을 포함하고 있는 것
+- **Dockerfile** = docker image를 만들기 위해 내리는 command들을 모아 둔 text 파일
+    - `docker build` 사용 → image 생성
+    - FROM, ADD, RUN, CMD, ENTRYPOINT, ENV
+- **Docker Compose** = 다수의 container를 규정하고 실행하고 관리하는 Docker automation 도구 (YAML 파일)
+
+## VM 과 비교하여 Docker 의 장점
+
+- ubuntu를 필요한 dependency 만 containerizing 하면서 size를 엄청나게 줄임 (GB → 50MB)
+- OS 는 in-memory 되어야 하는데 유효한 main-meomory 가 엄청나게 늘어나므로 이는 엄청난 throughput 개선으로 이어짐
+
+### VM vs Container
+
+![VM vs Container](images/VM-Container.png)
+
+## Docker Container Volume
+
+### 필요한 이유
+
+- container가 run 명령에 의해 시작될 때는 read-only image로부터 시작되어 container의 filesystem은 read-only layer 위에 read-write layer로 만들어진 virtual filesystem 이다.
+- 실제 Container를 시작한 후 만들어진 파일은 persistent filesystem에 저장된 것처럼 느껴지지만, 실제로는 디스크에 쓰여지는 것이 아니라 in-memory file system 에 쓰이는 것이므로, container가 종료되면 사라진다.
+- 동일한 image로부터 container를 다시 만들면, 저장한 데이터는 사라지게 된다.
+- 만약 DB를 사용하는 앱이라면, DB에 record 를 저장하였으나, container 가 종료되면 DB 테이블이 사라지게 된다.
+
+⇒ 이러한 문제를 해결하기 위해 Container Volume을 제공
+
+### Docker Volume 설명
+
+- `-v <host path> : <mounting point path in container>`
+- volume 을 mount 하여 실제 디스크에 영구적으로 데이터를 저장하여, container가 종료되어도 영구적으로 데이터를 저장할 수 있다
+- but, 단점도 있다.
+- container의 장점 중의 하나는 container들 사이에 filesystem을 통한 간섭이 없어서 보안이 뛰어나다는 것인데 volume 기능은 잘못된 코딩 또는 바이러스에 의해 이러한 장점이 훼손될 수 있다.
+
+### Docker Volume 3가지 type
+
+1. Host volume
+
+    `docker run -v /home/mount/data:/var/lib/mysql/data`
+
+    - 정확하게 mount할 경로를 지정
+2. named volume
+
+    `docker run -v name:/var/lib/mysql/data`
+
+    - data 참조를 쉽게 하기 위해 이름으로 설정
+3. Anonymous volume
+
+    `docker run -v /var/lib/mysql/data`
+
+## Container Engine Architecture
+
+![Container-Engine-Architecture1](images/Container-Engine-Architecture1.png)
+출처 : [https://geekflare.com/docker-architecture/](https://geekflare.com/docker-architecture/)
+
+![Container-Engine-Architecture-in-Linux](images/Container-Engine-Architecture-in-Linux.png)
+출처 : [https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/containerd](https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/containerd)
+
+![Container-Engine-Architecture-in-Window](images/Container-Engine-Architecture-in-Window.png)
+출처 : [https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/containerd](https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/containerd)
+
+![Container-Engine-Architecture2](images/Container-Engine-Architecture2.png)
+출처 : [https://accenture.github.io/blog/2016/04/14/the-lightweight-docker-runtime.html](https://accenture.github.io/blog/2016/04/14/the-lightweight-docker-runtime.html)
+
+## 실습 - Apache-docker 
 
 ### Process
 
