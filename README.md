@@ -66,6 +66,18 @@
 
 
 
+# 3. Git & Github
+### 목적 : Version Control
+
+### DevOps 중 -  Version control 에 해당
+
+## 특징
+
+- 분산 **VCS** (Version Control System)
+- 다수의 개발자간 협력을 용이하게 하는 도우
+- 코드 수정에 대한 tracking
+- 수정 이력 편집 가능
+- Local / Remote Repository
 
 ## Assignment1
 
