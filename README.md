@@ -429,12 +429,109 @@ $ sudo docker ps
 $ sudo docker swarm leave     # on worker
 ```
 
-# 5. Kubernetes(k8s)
-작성 예정  
 <br><br>
 
+# 8. Kubernetes(k8s)
 
-# 6. Configuration Management tools (형상 관리)
+> “Container Orchestration tool"
+
+## Docker Swarm vs Kubernetes(k8s)
+
+![swarm vs k8s](images/swarm-k8s.png)
+
+## k8s Architecture
+
+![k8s-architecture1](images/k8s-architecture1.png)
+
+![k8s-architecture2](images/k8s-architecture2.png)
+
+## Kubernetes Architecture
+
+### Master Node Component
+
+- kubectl
+    - master node 에 명령을 내리는 CLI
+- API Server
+- Scheduler
+- ETCD Server
+    - 쿠버네티스의 기본 데이터 저장소
+- Control Manager
+    - Node Components
+    - Kubelet
+    - Pods
+- Overlay Network
+
+### Worker Node Components
+
+- Kubelet
+    - pod 관리
+    - Container running을 책임
+- Kube-Proxy
+    - 각 node의 network proxy
+    - 즉, Internet 연결
+- Pod
+    - 1개 이상의 docker container 포함
+
+## Cluster Scalability
+
+(v1.21, 2021 4월 기준)
+
+하나의 클러스터에는
+
+- node 당 최대 100 개 까지의 pod
+- 최대 5000 개 까지의 node
+- 최대 150,000 개 까지의 총 pod
+- 최대 300,000 개 까지의 총 container
+
+## k8s 장점
+
+1. Automatic bin packing (RAM-aware performance based)
+2. Service discovery & load balancing (DNS name for each service)
+3. Storage orchestration
+4. Self healing (restart failed containers)
+5. Automated rollouts & rollbacks
+6. Secret and configuration management (secret & config map in ETCD)
+7. **Batch execution (run to completion)**
+8. Horizontal scaling (CLI, UI, automatic based on CPU usage)
+
+### 여기서 잠깐, 배치프로그램이란? (Batch Processing)
+
+- 필요 상황 : 모인 대량의 데이터를 한번에 처리해야한다.
+- 이 때, 스케쥴링 해서 time-out되면 switching 되면 엄청난 비효율 이기 때문에, 시작하면 끝날 때까지 프로세스를 돌린다.
+
+1. 대량건의 데이터를 처리한다. (대규모 작업)
+
+2. 특정 시간에 실행된다. (업무 시간이 아닌 새벽 시간 등)
+
+3. 일괄적으로 처리한다. 
+
+## Kubernetes 정의
+
+- Official def: **Container orchestration tool**
+
+    = 분산 운영체제 with **no distributed file system**, **no cache management,** **no system calls**, **no per process control**, etc.
+
+    = Job control system on global scale of CDN/Service delivery network
+
+    = RAM (main memory)-aware throughput oriented
+
+    = no down time service via load balancing & auto scaling
+
+    ⇒ **분산 OS가 DevOps 파라다임을 실현하는 플랫폼이 됨**
+
+## Why now? (2014)
+
+Ans: 분산 OS에 대한 분명한 이해, CDN, Cloud Computing 성숙
+
+## Install & Use K8s
+
+## Reference
+
+- **Kubernetes Architecture** : [https://www.c-sharpcorner.com/article/getting-started-with-kubernetes-part2/](https://www.c-sharpcorner.com/article/getting-started-with-kubernetes-part2/)
+- **Cluster Scalability** : [https://kubernetes.io/docs/setup/best-practices/cluster-large/](https://kubernetes.io/docs/setup/best-practices/cluster-large/)
+- **Batch Processing** : [https://limkydev.tistory.com/140](https://limkydev.tistory.com/140)
+
+<br><br>
 ### 실습에서는 Ansible을 사용
 ## 개념
 ### Configuration Management tools
