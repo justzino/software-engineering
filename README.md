@@ -1,8 +1,71 @@
 <h1 align="center">Software Engineering</h1>
 
 > This is a repository for 'Software Engineering' Class of Hongik Univ.
+> This is a repository for 'Summary of Software Engineering' Class of Hongik Univ.
 
 # 1. Git & Github
+# 1. Software Development methodology
+## (1) Waterfall model - 말도 안됨 ㅎ
+![waterfall-model](images/waterfall-model.png)
+
+### 문제
+
+1. High Risk + Uncertainty
+2. 최종 단계에 가서야 동작하는 SW 가 생산됨
+3. 테스트 단계에서 단점이 발견되어도 수정하기 어려움
+4. Requirement들이 자주 변경되는 SW 개발에 적용하기 어려움
+5. 복잡한 SW 개발에 부적절
+6. Object Oriented 프로젝트에 부적절
+
+## (2) Agile Methodology
+
+- Waterfall 모델을 개선하려고 전체 개발 프로젝트를 여러 단계의
+- iteration으로 나눈 것
+- 각 iteration 의 소요 시간은 동일해야 하며 대략 2~8주
+- 각 iteration 마다 정해진 기능이 동작하는 SW 생산됨
+    ![agile-model](images/agile-model.png)
+
+## (3) 결론
+
+- "**구현 기술**"이 이러하기 때문에 이렇게 개발해야 한다 → 망하는 지름길
+- "**목표**"를 결정 → 구현가능한 엔지니어를 고용해야함
+
+
+
+# 2. 현재의 개발 방법론 및 Solution
+
+## CI/CD(Continuous Integration / Continuous Delivery(Deploy))
+
+- CI/CD 파이프라인은 더 자주 더 신뢰성 높은 수정된 코드를 deploy 할 수 있도록 DevOps 팀이 SW를 구현하는 방법
+- Object Oriented SW design/implementation 기술 발전에 기인, 실제 복잡한 SW 개발자들의 누적된 경험에 의한 팀 문화적 산물
+- DevOps SW 개발 도구들의 발전으로 꽃을 피우기 시작 
+  -> DevOps 도구들을 사용하면 CI/CD가 강제적으로 수행됨
+
+## DevOps
+
+= CI / CD Methodology realized by a set of automation tools
+    ![cicd](images/cicd.png)
+    ![cicd2](images/cicd2.jpg)
+
+### DevOps 의 작동 방식
+
+1. Continuous Development
+2. Version control – **Git**, SVN
+3. Automatic builder/packager to executables – Maven, Ant, Gradle
+4. Continuous Testing – **Selenium**
+5. Continuous Deployment – 실행 파일을 특정 서버 (테스팅 서버, production 서버)에 배포
+
+    (a) Containerization (vs VM) – **Docker** + **Docker Swarm**
+
+    (b) Configuration management – Puppet, **Ansible**
+
+6. Continuous Monitoring – 네트워크 모니터링과 배포된 소프트웨어의 버그 및 사용자로부터의 feedback 수집 – **Nagios**
+7. Continuous Integration – 위 모든 SW lifecycle의 도구들을 연합하고 연속적이고 자동적으로 각 작업이 수행되도록 함, 모든 위 도구들과 연동
+    - **Jenkins** – 300개 이상의 plug-ins
+    - cf) Kubernetes – Docker container orchestration manager (vs docker swarm)
+
+
+
 
 ## Assignment1
 
