@@ -662,6 +662,84 @@ Ans: 분산 OS에 대한 분명한 이해, CDN, Cloud Computing 성숙
 - SSH connection from server to machines
 - 간편
 
+# 10. Ansible - CM tools
+
+### DevOps 중 - Deploy, Operate 과정에 해당
+
+## About Ansible
+
+- IT 자동화 도구
+- 단순성과 사용 편의성에 중점
+- 앤서블은 **에이전트가 없는 구조**이기 때문에 별도의 에이전트 설치가 필요 없다.
+- 기존의 에이전트 역할을 **SSH** 데몬이 대체하기 때문에 SSH 접속만 가능한 서버라면 앤서블의 제어 대상이 될 수 있다.
+- OpenSSH는 가장 많이 검토된 오픈 소스 구성 요소 중 하나이므로 보안 노출이 크게 줄어든다
+- Ansible은 분산돼있으며 기존 OS 자격 증명을 사용하여 원격 컴퓨터에 대한 엑세스를 제어한다.
+
+    ![ansible-ssh](images/ansible-ssh.png)
+
+    출처 : [https://blog.naver.com/alice_k106/221333208746](https://blog.naver.com/alice_k106/221333208746)
+
+## 내가 가졌던 의문
+
+> k8s도 Deploy 과정에서 자동화를 해주는데 앤서블(ansible)은 왜 필요한가?
+
+구글링을 통해 동일한 고민을 했던 분의 [블로그](https://medium.com/harrythegreat/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-ci-di-%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0-a6657d429c26) 를 통해서 답을 찾을 수 있었다. 아래 내용은 해당 블로그의 내용을 빌려 적어놓았다.
+
+## 필요한 이유
+
+- 쿠버 네티스로 서비스를 돌려도 최소한 노드 컴퓨터에 최소한의 설정 하다못해 SSH 키나 docker sudo 설정이라도 해주어야 합니다.
+- 규모가 작다면 문제가 되지 않겠지만 서비스의 규모가 늘어나면 늘어날수록 야근이 많아지게 됩니다.
+
+![ansible](images/ansible.png)
+
+출처 : [https://medium.com/harrythegreat/쿠버네티스-ci-di-를-위한-오픈소스-프로젝트-알아보기-a6657d429c26](https://medium.com/harrythegreat/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-ci-di-%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0-a6657d429c26)
+
+- 앤서블은 이러한 기본적 **프로비저닝**과 설정 등을 자동화해줄 수 있으며 코드로서의 인프라(Infrastructure as Code)를 표방하기 때문에 playbook으로 명칭 되는 yaml형식의 문법으로 전체적인 인프라 프로비저닝을 관리할 수 있습니다.
+
+    **프로비저닝** : 사용자의 요구에 맞게 시스템 자원을 할당, 배치, 배포해 두었다가 필요 시 시스템을 즉시 사용할 수 있는 상태로 미리 준비해 두는 것을 말한다.
+
+- 게다가 JSON기반의 통신인 데다 SSH를 지원하기 때문에 다른 툴들에 비해 러닝 커브가 적습니다.
+
+![ansible2](images/ansible2.png)
+
+출처 : [https://medium.com/harrythegreat/쿠버네티스-ci-di-를-위한-오픈소스-프로젝트-알아보기-a6657d429c26](https://medium.com/harrythegreat/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-ci-di-%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0-a6657d429c26)
+
+## Ansible Architecture
+
+Ansible은 클라우드 프로비저닝, configuration 관리, 어플리케이션 배포, 인프라-서비스 오케스트레이션 및 여러 기타 IT 요구사항을 자동화 하는 IT 자동화 엔진이다.
+
+- Control node : Ansible이 설치된 (종류에 상관없이) 모든 시스템
+- Managed nodes : Ansible로 관리하는 네트워크 장치 (and/or servers)
+
+![ansible-architechture](images/ansible-architechture.png)
+
+출처 : edureka!
+
+- Tasks : Ansible의 작업 단위
+    - Ad-Hoc Command : 단일 작업(task)을 수행하는 것
+- playbook : 반복해서 실행하고자 해당 작업을 실행 순서대로 저장해 놓은 정렬된 작업 리스트
+- Modules : Ansible 코드의 실행 단위
+- Inventory : 관리되는 노드의 목록
+
+## **멱등성(idempotence)**
+
+- 엔서블 대해 이야기할 때 많이 나오는 용어가 **멱등성(idempotence)** 이다.
+- **멱등성**이란 동일한 작업을 계속해서 수행해도 항상 동일한 결과가 나오는 것을 뜻하는 용어로
+- 이미 프로비저닝 된 머신에 여러 번 Ansible로 배포되어도 항상 동일한 결과를 얻을 수 있도록 디자인되었습니다.
+
+## 기본적인 Ansible command 또는 playbook
+
+- 인벤토리에서 실행할 기계를 선택한다.
+- 일반적으로 SSH를 통해 해당 시스템 (or 네트워크 장치 or 기타 관리 노드)에 연결한다.
+- 하나 이상의 모듈을 원격 시스템에 복사하고, 거기서 실행을 시작한다.
+
+## Reference
+
+- [https://medium.com/harrythegreat/쿠버네티스-ci-di-를-위한-오픈소스-프로젝트-알아보기-a6657d429c26](https://medium.com/harrythegreat/%EC%BF%A0%EB%B2%84%EB%84%A4%ED%8B%B0%EC%8A%A4-ci-di-%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0-a6657d429c26)
+- [https://velog.io/@hanblueblue/번역-Ansible](https://velog.io/@hanblueblue/%EB%B2%88%EC%97%AD-Ansible)
+
+
+
 ## 실습
 실습을 위해 EC2 instance 2개 준비: Master + Node
 
