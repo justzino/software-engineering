@@ -456,6 +456,31 @@ $ sudo docker swarm leave     # on worker
 
 > “Container Orchestration tool"
 
+### DevOps 중 - Deploy/Operate 에 해당
+
+## Kubernetes 정의
+
+쿠버네티스는 컨테이너화된 워크로드와 서비스를 관리하기 위한 이식성이 있고, 확장가능한 오픈소스 플랫폼
+
+- 분산 운영체제 with **no distributed file system**, **no cache management,** **no system calls**, **no per process control**, etc.
+- Job control system on global scale of CDN/Service delivery network
+- RAM (main memory)-aware throughput oriented
+- no down time service via load balancing & auto scaling
+
+    ⇒ **분산 OS가 DevOps 파라다임을 실현하는 플랫폼이 됨**
+
+## 필요한 이유
+
+- 컨테이너는 애플리케이션을 포장하고 실행하는 좋은 방법이다. 프로덕션 환경에서는 애플리케이션을 실행하는 **컨테이너를 관리하고 가동 중지 시간이 없는지 확인해야 한다**.
+- **예를 들어 컨테이너가 다운되면 다른 컨테이너를 다시 시작해야 한다.** **이 문제를 시스템에 의해 처리한다면 더 쉽지 않을까?**
+
+이것이 쿠버네티스가 필요한 이유이다!
+
+## 어떻게?
+
+쿠버네티스는 분산 시스템을 탄력적으로 실행하기 위한 프레임 워크를 제공한다. 애플리케이션의 확장과 장애 조치를 처리하고, 배포 패턴 등을 제공한다. 
+예를 들어, 쿠버네티스는 시스템의 카나리아 배포를 쉽게 관리 할 수 있다.
+
 ## Docker Swarm vs Kubernetes(k8s)
 
 ![swarm vs k8s](images/swarm-k8s.png)
@@ -524,21 +549,7 @@ $ sudo docker swarm leave     # on worker
 
 2. 특정 시간에 실행된다. (업무 시간이 아닌 새벽 시간 등)
 
-3. 일괄적으로 처리한다. 
-
-## Kubernetes 정의
-
-- Official def: **Container orchestration tool**
-
-    = 분산 운영체제 with **no distributed file system**, **no cache management,** **no system calls**, **no per process control**, etc.
-
-    = Job control system on global scale of CDN/Service delivery network
-
-    = RAM (main memory)-aware throughput oriented
-
-    = no down time service via load balancing & auto scaling
-
-    ⇒ **분산 OS가 DevOps 파라다임을 실현하는 플랫폼이 됨**
+3. 일괄적으로 처리한다.
 
 ## Why now? (2014)
 
@@ -548,7 +559,7 @@ Ans: 분산 OS에 대한 분명한 이해, CDN, Cloud Computing 성숙
 
 ## Reference
 
-- **Kubernetes Architecture** : [https://www.c-sharpcorner.com/article/getting-started-with-kubernetes-part2/](https://www.c-sharpcorner.com/article/getting-started-with-kubernetes-part2/)
+- 공식문서 : https://kubernetes.io/ko/docs/concepts/overview/what-is-kubernetes/
 - **Cluster Scalability** : [https://kubernetes.io/docs/setup/best-practices/cluster-large/](https://kubernetes.io/docs/setup/best-practices/cluster-large/)
 - **Batch Processing** : [https://limkydev.tistory.com/140](https://limkydev.tistory.com/140)
 
