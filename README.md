@@ -532,6 +532,8 @@ Ans: 분산 OS에 대한 분명한 이해, CDN, Cloud Computing 성숙
 - **Batch Processing** : [https://limkydev.tistory.com/140](https://limkydev.tistory.com/140)
 
 <br><br>
+
+# 9. Configuration Management tools (형상 관리)
 ### 실습에서는 Ansible을 사용
 ## 개념
 ### Configuration Management tools
@@ -657,7 +659,7 @@ $ ssh <private ip address>    # node 기계에서 passwd root, 작동 여부 확
 #### Playbook 을 위한 yml 파일 작성
 
 
-# 7. Selenium 
+# 10. Selenium 
 | 가장 대표적인 **Automated testing suite**
 
 ### 단점
@@ -694,7 +696,7 @@ $ ssh <private ip address>    # node 기계에서 passwd root, 작동 여부 확
 - 용자의 모든 interaction을 기록하고 재생
 - record/play tool로 불림
 
-# 8. Jenkins
+# 11. Jenkins
 ### 개념
 
 ### 설치
