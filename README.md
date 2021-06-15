@@ -1,6 +1,6 @@
 <h1 align="center">Software Engineering</h1>
 
-> This is a repository for 'Summary of Software Engineering' Class of Hongik Univ.
+> This is a summary of the concepts and practice of each DevOps tools that I've studied in the software engineering class.
 
 # 1. Software Development methodology
 ## (1) Waterfall model
