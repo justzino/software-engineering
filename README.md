@@ -42,7 +42,7 @@
 ## DevOps
 
 = CI / CD Methodology realized by a set of automation tools
-    ![cicd](images/cicd.png)
+    ![cicd1](images/cicd1.png)
     ![cicd2](images/cicd2.jpg)
 
 ### DevOps 의 작동 방식
@@ -66,7 +66,8 @@
 
 # 3. Git & Github
 ### 목적 : Version Control
-- **DevOps 중 -  Version control 에 해당**
+
+### DevOps 중 -  Code, Version control 에 해당
 
 ## 특징
 
@@ -90,7 +91,8 @@
 
 - testing / staging / production의 시스템 환경이 달라서 생기는 문제를 해결하자
 - 서로 다른 컴퓨팅 환경에서 애플리케이션을 안정적으로 실행할 수 있으며 개발 환경에 구애 받지 않고 빠른 개발과 배포가 가능하도록 하자
-- **DevOps 중 - Deploy/Operate 에 해당**
+
+### DevOps 중 - Deploy/Operate 에 해당
 
 <br>
 
@@ -114,12 +116,13 @@
 
 <br>
 
-## VM 과 비교하여 Docker 의 장점
+## VM vs Docker
 
-- ubuntu를 필요한 dependency 만 containerizing 하면서 size를 엄청나게 줄임 (GB → 50MB)
+- 애플리케이션 간에 운영체제(OS)를 공유 → 가벼워짐
+- ubuntu를 필요한 dependency 만 containerizing 하면서 가벼워짐 (GB → 50MB)
 - OS 는 in-memory 되어야 하는데 유효한 main-meomory 가 엄청나게 늘어나므로 이는 엄청난 throughput 개선으로 이어짐
-
-### VM vs Container
+- VM과 마찬가지로 컨테이너에는 자체 파일 시스템, CPU 점유율, 메모리, 프로세스 공간 등이 있다
+- 기본 인프라와의 종속성을 끊었기 때문에, 클라우드나 OS 배포본에 모두 이식할 수 있다.
 
 ![VM vs Container](images/VM-Container.png)
 
@@ -162,6 +165,9 @@
 <br>
 
 ## Container Engine Architecture
+
+- Container는 hypervisor와 완전히 다릅니다. 궁극적으로는 hypervisor와 유사한 형태의 "가상화"를 목표로 하고 있지만 hypervisor는 OS 및 커널이 통째로 가상화되는 반면에 container는 간단히 보면 **filesystem의 가상화**만을 이루고 있습니다.
+- container는 호스트 PC의 커널을 공유하고 따라서 init(1) 등의 프로세스가 떠있을 필요가 없으며, 따라서 가상화 프로그램과는 다르게 적은 메모리 사용량, 적은 overhead를 보입니다.
 
 ![Container-Engine-Architecture1](images/Container-Engine-Architecture1.png)
 출처 : [https://geekflare.com/docker-architecture/](https://geekflare.com/docker-architecture/)
@@ -235,6 +241,9 @@ $ sudo docker rmi -f $(sudo docker images -a -q)
 $ service apache2 status
 $ service apache2 start
 ```
+
+### Reference
+- https://docs.docker.com/compose/wordpress/
 
 <br><br>
 
@@ -715,5 +724,3 @@ $ ssh <private ip address>    # node 기계에서 passwd root, 작동 여부 확
 
 ### 실습
 
-# Reference
-- https://docs.docker.com/compose/wordpress/
