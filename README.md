@@ -565,36 +565,56 @@ Ans: 분산 OS에 대한 분명한 이해, CDN, Cloud Computing 성숙
 
 <br><br>
 
-# 9. Configuration Management tools (형상 관리)
-### 실습에서는 Ansible을 사용
-## 개념
-### Configuration Management tools
+# 9. 구성 관리 tools (Configuration Management tools)
 
+### DevOps 중 - Deploy, Operate 과정에 해당
+## Configuration Management tools 의 개념
+
+- IT 자동화 (Automation) 의 기본 도구
 - Why automated CM?
     - 대규모 heterogeneous computer cluster 관리
-        - 수백~수천~수만 대 이상 서버/1500대 규모의 네트워크 장비
+        - 수백~수만 대 이상 서버/1500대 규모의 네트워크 장비
     - HW 모니터링
     - SW install
-    - DevOps 중 Deploy 과정에 해당되는 도구
     - Environment 불일치 문제 해소 (cf. containerization)
     - Roll back 자동화
-    - 부실한 CM은 Service Downtime에 xx가장 큰 요인
-- IT Automation의 기본 도구
+    - 부실한 CM은 Service Downtime에 가장 큰 요인
 
-### IaC (Infrastructure as Code)
+## 목적 : IaC (Infrastructure as Code)
 
 - 수작업이 아닌 code를 제공하여 IT operations (build, deploy, manage)을 자동화하는 것
-- 중앙에서 코드를 write하여 수백 대 이상의 기기에 Dev, Test, Production 환경을 제공(provisioning)함
+- 중앙에서 코드를 write하여 수백 대 이상의 기기에 Dev, Test, Production 환경을 제공(**provisioning**)함
+- 환경의 배포와 구성을 규격화된 코드로 정의해 사용
+- 인프라의 상태를 코드로 선언하고 이를 모든 서버에 배포함으로써 특정 환경을 동일하게 유지
+- 환경 자동화 도구의 대표적인 예시가 앤서블
+- 앤서블은 환경의 배포뿐만 아니라 서버 클러스터의 체계적인 관리, 확장 가능한 모듈의 사용 등 다양한 측면에서 사용될 수 있는 도구
 
-### Shell script vs CM tool script
+## Shell script vs CM tool script
 
-- 각 서버/기기에 환경을 provisioning 하는 점에서는 동일 목표
-- Shell script로 관리를 위한 코딩을 한다는 것은 모든 것을 scrip로 구현하는 것  
-  → workflow/숙련도/일관성/upgrade 이슈
-- CM script는 훨씬 편리 → 이슈를 제거/자동처리
+= shell script 기반 vs YAML 로 관리 사항을 기재 
+
+= procedural vs declarative
+
+### 공통점
+
+각 서버/기기에 환경을 provisioning 하는 점에서는 동일 목표
+
+1.  IT Automation
+    - IT 업무자의 작업을 자동화하는 명령 기재
+2.  Configuration Management
+    - 전체 infrastructure 의 일관성을 유지
+3.  Automatic Deployment
+    - 다양한 환경에서 동작하는 앱들을 자동으로 배치(deploy)
+
+### 차이점
+
+- Shell script로 관리를 위한 코딩을 한다는 것은 모든 것을 scrip로 구현하는 것 
+→ workflow/숙련도/일관성/upgrade 이슈
+- **CM script는 훨씬 편리** → 이슈를 제거/자동처리
 - CM Tool UI
 
-### Puppet vs Chef vs Saltstack vs Ansible
+## 도구 종류 : Puppet vs Chef vs Saltstack vs Ansible
+
 - 어느 도구가 상대적으로 우수하다고 할 수 없음
 1. Scalability
     - 4 개 도구 모두 scalability 우수 (수천 대 이상의 기기 동시 관리)
@@ -627,6 +647,20 @@ Ans: 분산 OS에 대한 분명한 이해, CDN, Cloud Computing 성숙
     - 대략 연간 10,000달러 / 1,000대 기기
 9. 누가 사용하나?
     - 모든 회사
+
+### 실습에는 **Ansible 을 사용**
+
+## CM Architectures
+
+- Pull Architecture
+- Agents (clients)가 주기적으로 master (server)에게 configuration 문의
+- 독자적인 기능 추가 편리
+- Push Architecture
+- Server가 주기적으로 node들에 configuration을 주입
+- No client side setup at all
+- How? <= Shell command with root privileges
+- SSH connection from server to machines
+- 간편
 
 ## 실습
 실습을 위해 EC2 instance 2개 준비: Master + Node
