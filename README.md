@@ -806,21 +806,24 @@ $ ssh <private ip address>    # node 기계에서 passwd root, 작동 여부 확
 # 10. Selenium 
 | 가장 대표적인 **Automated testing suite**
 
-### 단점
-- Web app만 테스트
-- 지원 프로그램 (open source community)
-- Setup과 사용법 불편
-- IDE integrated / PL 숙련도에 좌우됨
-- No graphic reporting facility
-- Image 기반 테스팅 불가 – 이미지 비교 기능 없음
-### 장점
+### DevOps 중 - Test 과정에 해당
+
+## 장점
 - Open source
 - 여러 PL 에서 사용 가능
 - 여러 web browser 지원 including headless browser
 - Parallel test execution
 - Supports frameworks : TestNG, JUnit, NUnit
 
-### Webdriver
+## 단점
+- Web app만 테스트
+- 지원 프로그램 (open source community)
+- Setup과 사용법 불편
+- IDE integrated / PL 숙련도에 좌우됨
+- No graphic reporting facility
+- Image 기반 테스팅 불가 – 이미지 비교 기능 없음
+
+## Webdriver
 - 테스트 케이스를 생성하고 실행하는 API
   - https://webdriver.io/docs/api.html
 - Provides a set of methods
@@ -835,15 +838,17 @@ $ ssh <private ip address>    # node 기계에서 passwd root, 작동 여부 확
   - Remote machine 에서 web 테스트할 때는 RC 사용 (느림)
 - 상세한 테스트 결과보고는 (아직) 생성할 수 없음
 
-### Selenium IDE
+## Selenium IDE
 - 테스트 케이스를 생성하고 실행하는 plug-in
 - 용자의 모든 interaction을 기록하고 재생
 - record/play tool로 불림
 
 # 11. Jenkins
-### 개념
 
-### 설치
+### DevOps 중 - CI 에 해당
 
-### 실습
+## Pipeline
 
+- configure 에서 plugin 을 Groovy Script 를 이용하여 정의
+
+# 12. Nagios monitoring tool
