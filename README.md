@@ -3,9 +3,9 @@
 > This is a repository for 'Summary of Software Engineering' Class of Hongik Univ.
 
 # 1. Software Development methodology
-## (1) Waterfall model - 말도 안됨 ㅎ
+## (1) Waterfall model
 ![waterfall-model](images/waterfall-model.png)
-
+> 사실 말도 안됨...ㅎㅎ
 ### 문제
 
 1. High Risk + Uncertainty
@@ -66,8 +66,7 @@
 
 # 3. Git & Github
 ### 목적 : Version Control
-
-### DevOps 중 -  Version control 에 해당
+- **DevOps 중 -  Version control 에 해당**
 
 ## 특징
 
@@ -83,7 +82,7 @@
 
 > hosting url : https://justzino.github.io/hongik-software-engineering/
 
-<br><br>
+<br><br><br>
 
 # 4. Docker
 
@@ -91,13 +90,16 @@
 
 - testing / staging / production의 시스템 환경이 달라서 생기는 문제를 해결하자
 - 서로 다른 컴퓨팅 환경에서 애플리케이션을 안정적으로 실행할 수 있으며 개발 환경에 구애 받지 않고 빠른 개발과 배포가 가능하도록 하자
+- **DevOps 중 - Deploy/Operate 에 해당**
 
-### DevOps 중 - Deploy/Operate 에 해당
+<br>
 
 ## 어떻게 목적 달성?
 
 - 개발 환경의 일관성 : 개발환경과 서비스 환경을 동일하게 만들자
 - 모든 SW dependency를 "contain" 할 수 있는 SW container 를 만들어서 동일하게 구성하자
+
+<br>
 
 ## 용어 정의 및 개념
 
@@ -110,6 +112,8 @@
     - FROM, ADD, RUN, CMD, ENTRYPOINT, ENV
 - **Docker Compose** = 다수의 container를 규정하고 실행하고 관리하는 Docker automation 도구 (YAML 파일)
 
+<br>
+
 ## VM 과 비교하여 Docker 의 장점
 
 - ubuntu를 필요한 dependency 만 containerizing 하면서 size를 엄청나게 줄임 (GB → 50MB)
@@ -118,6 +122,8 @@
 ### VM vs Container
 
 ![VM vs Container](images/VM-Container.png)
+
+<br>
 
 ## Docker Container Volume
 
@@ -153,6 +159,8 @@
 
     `docker run -v /var/lib/mysql/data`
 
+<br>
+
 ## Container Engine Architecture
 
 ![Container-Engine-Architecture1](images/Container-Engine-Architecture1.png)
@@ -166,6 +174,8 @@
 
 ![Container-Engine-Architecture2](images/Container-Engine-Architecture2.png)
 출처 : [https://accenture.github.io/blog/2016/04/14/the-lightweight-docker-runtime.html](https://accenture.github.io/blog/2016/04/14/the-lightweight-docker-runtime.html)
+
+<br>
 
 ## 실습 - Apache-docker 
 
@@ -326,6 +336,8 @@ volumes:
 - 각 Container의 상태를 모니터링하여 컨테이너 수를 각 호스트에서 늘리거나 줄이며 운영하는 도구
 - **여러 호스트에서** 다수의 컨테이너들을 운영(orchaestrate), 필요에 따라 컨테이너의 수를 늘리고 줄이는 auto-scaling 기능
   ![swarm](images/swarm.png)
+
+<br>
 
 ## 실습
 
