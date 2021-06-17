@@ -17,8 +17,7 @@
 
 ## (2) Agile Methodology
 
-- Waterfall 모델을 개선하려고 전체 개발 프로젝트를 여러 단계의
-- iteration으로 나눈 것
+- Waterfall 모델을 개선하려고 전체 개발 프로젝트를 여러 단계의 iteration으로 나눈 것
 - 각 iteration 의 소요 시간은 동일해야 하며 대략 2~8주
 - 각 iteration 마다 정해진 기능이 동작하는 SW 생산됨
     ![agile-model](images/agile-model.png)
@@ -72,7 +71,7 @@
 ## 특징
 
 - 분산 **VCS** (Version Control System)
-- 다수의 개발자간 협력을 용이하게 하는 도우
+- 다수의 개발자간 협력을 용이하게 하는 도구
 - 코드 수정에 대한 tracking
 - 수정 이력 편집 가능
 - Local / Remote Repository
@@ -852,4 +851,25 @@ $ ssh <private ip address>    # node 기계에서 passwd root, 작동 여부 확
 
 - configure 에서 plugin 을 Groovy Script 를 이용하여 정의
 
+### [실습 repo](https://github.com/justzino/jenkins-demo)
+
 # 12. Nagios monitoring tool
+
+## Continuous Monitoring
+- 임의의 네트워크 또는 서버 문제 탐지
+- 문제의 원인 판별
+- 보안과 가용성 유지
+- 성능 문제 모니터링 및 검사
+- 신속한 대응
+- 모든 업무 과정 및 인프라 전체 모니터링
+
+## 종류
+1. Nagios Core
+    - open source, free, CLI based
+2. Nagios XI
+    - 유료
+    - 기업용
+    - GUI
+
+## 실습
+https://www.itzgeek.com/how-tos/linux/centos-how-tos/how-to-install-nagios-4-4-3-on-rhel-8.html
